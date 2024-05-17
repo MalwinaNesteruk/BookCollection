@@ -1,0 +1,50 @@
+﻿@model BookCollection.Models.Book
+
+@{
+    ViewData["Title"] = "AddBook";
+}
+
+<h1>Dodawanie książki</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddBook">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Tytuł</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameAuthor" class="control-label">Imię autora</label>
+                <input asp-for="NameAuthor" class="form-control" />
+                <span asp-validation-for="NameAuthor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurnameAuthor" class="control-label">Nazwisko autora</label>
+                <input asp-for="SurnameAuthor" class="form-control" />
+                <span asp-validation-for="SurnameAuthor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genre" class="control-label">Gatunek literacki</label>
+                <input asp-for="Genre" class="form-control" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearOfPublication" class="control-label">Data wydania</label>
+                <input asp-for="YearOfPublication" class="form-control" />
+                <span asp-validation-for="YearOfPublication" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BookCollection.Models.Book>
+
+<h1>Przeglądanie katalogu książek</h1>
+
+<hr />
+
+<ul>
+    @foreach (var book in Model)
+    {
+        <li>@book.Title - @book.NameAuthor @book.SurnameAuthor</li>
+    }
+</ul>
