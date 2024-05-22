@@ -16,6 +16,6 @@ namespace BookCollection.Models
         public string Genre { get; set; }
         [Required(ErrorMessage = "Pole 'Data wydania' nie zostało uzupełnione")]
         [Range(1800, 2024, ErrorMessage = "W katalogu można zamieścić książki wydane między rokiem 1800 a 2024")]
-        public int YearOfPublication { get; set; }
+        public int YearOfPublication { get ; set; }
     }
 }

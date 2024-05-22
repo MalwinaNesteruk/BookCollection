@@ -33,6 +33,7 @@ namespace BookCollection.Controllers
         [HttpGet]
         public IActionResult GetAllBook() 
         {
+
             return View(_bookService.GetAll());
         }
     }

@@ -1,9 +1,5 @@
 ﻿@model BookCollection.Models.Book
 
-@{
-    ViewData["Title"] = "AddBook";
-}
-
 <h1>Dodawanie książki</h1>
 
 <hr />
@@ -32,8 +28,8 @@
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="YearOfPublication" class="control-label">Data wydania</label>
-                <input asp-for="YearOfPublication" class="form-control" />
+                <label asp-for="YearOfPublication" class="control-label">Data wydania</label> @* tworzy labelkę *@
+                <input asp-for="YearOfPublication" class="form-control" /> @* tworzy pole tekstowe typu liczbowego *@
                 <span asp-validation-for="YearOfPublication" class="text-danger"></span>
             </div>
             <div class="form-group">

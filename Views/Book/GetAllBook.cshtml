@@ -4,9 +4,46 @@
 
 <hr />
 
-<ul>
+<style type="text/css">
+    select {
+        padding: 5px 5px 5px 5px;
+    }
+    label {
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<label for="sorting">Sortuj wg</label>
+<select name="sorting" id="sorting">
+    <option value="1">domyślnie</option>
+    <option value="2">tytuł A-Z</option>
+    <option value="3">tytuł Z-A</option>
+    <option value="4">autor A-Z</option>
+    <option value="5">autor Z-A</option>
+    <option value="6">gatunek A-Z</option>
+    <option value="7">gatunek Z-A</option>
+    <option value="8">data wydania rosnąco</option>
+    <option value="9">data wydania malejąco</option>
+</select>
+
+<link href="~/css/table.css" type="text/css" rel="stylesheet" />
+
+<table>
+    <tr>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>Gatunek</th>
+        <th>Data wydania</th>
+    </tr>
+    
     @foreach (var book in Model)
     {
-        <li>@book.Title - @book.NameAuthor @book.SurnameAuthor</li>
+        <tr>
+            <td>@book.Title</td>
+            <td>@book.NameAuthor @book.SurnameAuthor </td>
+            <td>@book.Genre</td>
+            <td>@book.YearOfPublication</td>
+        </tr>
     }
-</ul>
+</table>
