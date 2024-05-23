@@ -1,12 +1,25 @@
 ﻿using BookCollection.Models;
 using BookCollection.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookCollection.Controllers
 {
     public class BookController : Controller
     {
         public readonly IBookService _bookService;
+        List<string> option = new List<string>()
+        { 
+              "tytuł A-Z",
+              "tytuł Z-A",
+              "autor A-Z",
+              "autor Z-A",
+              "gatunek A-Z",
+              "gatunek Z-A",
+              "data wydania rosnąco",
+              "data wydania malejąco"
+        };
+
         public BookController(IBookService bookService)
         {
             _bookService = bookService;
@@ -33,7 +46,70 @@ namespace BookCollection.Controllers
         [HttpGet]
         public IActionResult GetAllBook() 
         {
+            SelectList selectOption = new SelectList(option);
+            ViewBag.Book = selectOption;
+            return View(_bookService.GetAll());
+        }
 
+        [HttpPost]
+        public IActionResult GetAllBook(string sorting)
+        {
+            SelectList selectOption = new SelectList(option);
+            ViewBag.Book = selectOption;
+            if (sorting=="tytuł A-Z")
+            {
+                return View(_bookService.TitleAToZ());
+            }
+
+            else if (sorting == "tytuł Z-A")
+            {
+                return View(_bookService.TitleZToA());
+            }
+
+            else if (sorting == "autor A-Z")
+            {
+                return View(_bookService.AuthorAToZ());
+            }
+
+            else if (sorting == "autor Z-A")
+            {
+                return View(_bookService.AuthorZToA());
+            }
+
+            else if (sorting == "gatunek A-Z")
+            {
+                return View(_bookService.GenreAToZ());
+            }
+
+            else if (sorting == "gatunek Z-A")
+            {
+                return View(_bookService.GenreZToA());
+            }
+
+            else if (sorting == "data wydania rosnąco")
+            {
+                return View(_bookService.YearAToZ());
+            }
+
+            else if (sorting == "data wydania malejąco")
+            {
+                return View(_bookService.YearZToA());
+            }
+
+            return View(_bookService.GetAll());
+        }
+
+        [HttpGet]
+        public IActionResult DeleteBook()
+        {
+            
+            return View(_bookService.GetAll());
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBook(int id)
+        {
+            
             return View(_bookService.GetAll());
         }
     }

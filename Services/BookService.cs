@@ -1,5 +1,6 @@
 ﻿using BookCollection.Models;
 using BookCollection.Services.Interfaces;
+using System.Linq;
 
 namespace BookCollection.Services
 {
@@ -20,6 +21,52 @@ namespace BookCollection.Services
         {
             _dbBook.Add(book);
             _dbBook.SaveChanges();
+        } 
+        
+        public void Delete(Book book)
+        {
+            _dbBook.Remove(book);
+            _dbBook.SaveChanges();
+        }
+
+        public IEnumerable<Book> TitleAToZ()
+        {
+            return _dbBook.Books.OrderBy(x => x.Title).ToList();
+        }
+        
+        public IEnumerable<Book> TitleZToA()
+        {
+            return _dbBook.Books.OrderByDescending(x => x.Title).ToList();
+        }        
+        
+        public IEnumerable<Book> AuthorAToZ()
+        {
+            return _dbBook.Books.OrderBy(x => x.SurnameAuthor).ToList();
+        }        
+        
+        public IEnumerable<Book> AuthorZToA()
+        {
+            return _dbBook.Books.OrderByDescending(x => x.SurnameAuthor).ToList();
+        }        
+        
+        public IEnumerable<Book> GenreAToZ()
+        {
+            return _dbBook.Books.OrderBy(x => x.Genre).ToList();
+        }        
+        
+        public IEnumerable<Book> GenreZToA()
+        {
+            return _dbBook.Books.OrderByDescending(x => x.Genre).ToList();
+        }        
+        
+        public IEnumerable<Book> YearAToZ()
+        {
+            return _dbBook.Books.OrderBy(x => x.YearOfPublication).ToList();
+        }        
+        
+        public IEnumerable<Book> YearZToA()
+        {
+            return _dbBook.Books.OrderByDescending(x => x.YearOfPublication).ToList();
         }
     }
 }

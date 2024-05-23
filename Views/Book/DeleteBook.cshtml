@@ -1,33 +1,28 @@
 ﻿@model IEnumerable<BookCollection.Models.Book>
 
-
-<h1>Przeglądanie katalogu książek</h1>
+<h1>Usuwanie książek</h1>
 
 <hr />
 
 <style type="text/css">
-    label {
-        width: 120px;
-        padding: 5px 0 0 5px;
-    }
-
-    .form-group {
-        padding: 5px 5px 5px 5px; 
+        
+    .btn {
+        border: 3px solid #FF0000;
+        background-color: white;
+        color: #FF0000;
+        padding: 15px 30px;
+        font-size: 16px;
         margin-bottom: 15px;
-        width: 300px;
-        display: flex;
     }
-
 
 </style>
 
-@using (Html.BeginForm())
-{
-    <div class="form-group">
-        @Html.Label("Sortuj wg: ")
-        @Html.DropDownList("sorting", ViewBag.Book as SelectList, "domyślnie", new { @class = "form-control", onchange = "this.form.submit();"})
-    </div>
-}
+<div class="delete">
+    <form asp-action="DeleteBook" method="post">
+        <button class="btn btn-default">Usuń</button>
+    </form>
+</div>
+@* @Html.ActionLink("Delete", "Delete", new { id = item.BookId }) *@
 
 <link href="~/css/table.css" type="text/css" rel="stylesheet" />
 
@@ -37,8 +32,9 @@
         <th>Autor</th>
         <th>Gatunek</th>
         <th>Data wydania</th>
+        <th></th>
     </tr>
-    
+
     @foreach (var book in Model)
     {
         <tr>
@@ -46,6 +42,7 @@
             <td>@book.NameAuthor @book.SurnameAuthor </td>
             <td>@book.Genre</td>
             <td>@book.YearOfPublication</td>
+            <td><input type="checkbox"></td>
         </tr>
     }
 </table>
