@@ -1,15 +1,26 @@
-﻿@model IEnumerable<BookCollection.Models.Book>
+﻿@using Microsoft.JSInterop
+@model IEnumerable<BookCollection.Models.Book>
+@inject IJSRuntime JsRuntime
 
 <h1>Usuwanie książek</h1>
 
 <hr />
 
 <style type="text/css">
-        
-    .btn {
+
+    .btn:enabled {
         border: 3px solid #FF0000;
         background-color: white;
         color: #FF0000;
+        padding: 15px 30px;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .btn:disabled {
+        border: 3px solid #696969;
+        background-color: white;
+        color: #696969;
         padding: 15px 30px;
         font-size: 16px;
         margin-bottom: 15px;
@@ -19,12 +30,18 @@
 
 <div class="delete">
     <form asp-action="DeleteBook" method="post">
-        <button class="btn btn-default">Usuń</button>
+        <button class="btn btn-default" id="btn" name="btn" disabled="true" onclick="onConfirm();">Usuń</button>
     </form>
 </div>
+
 @* @Html.ActionLink("Delete", "Delete", new { id = item.BookId }) *@
 
+
 <link href="~/css/table.css" type="text/css" rel="stylesheet" />
+
+@{
+    int i = 0;
+}
 
 <table>
     <tr>
@@ -42,7 +59,35 @@
             <td>@book.NameAuthor @book.SurnameAuthor </td>
             <td>@book.Genre</td>
             <td>@book.YearOfPublication</td>
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" name="checkboxInTable" id="@{i++;}" onclick="validate(this)"></td>
         </tr>
     }
 </table>
+
+<script>
+function validate(checkboxInTable) 
+{
+   let counter = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        if (counter == 1) {
+            if (checkboxInTable.checked) {
+                const button = document.getElementById("btn");
+                button.removeAttribute("disabled");
+            }
+        }
+        else if (counter == 0) {
+            if (!checkboxInTable.checked) {
+                const button = document.getElementById("btn");
+                button.setAttribute("disabled", true);
+            }
+            
+        }
+}
+    function onConfirm() {
+        if (confirm('Czy na pewno chcesz usunąć wybrane książki?'))
+            if ;
+        else
+            alert('clicked confirmed');
+
+    };
+
+</script>

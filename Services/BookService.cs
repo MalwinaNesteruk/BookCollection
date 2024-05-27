@@ -23,9 +23,10 @@ namespace BookCollection.Services
             _dbBook.SaveChanges();
         } 
         
-        public void Delete(Book book)
+        public void Delete(int id)
         {
-            _dbBook.Remove(book);
+            var dbBook = _dbBook.Find<Book>(id);
+            _dbBook.Remove(dbBook);
             _dbBook.SaveChanges();
         }
 

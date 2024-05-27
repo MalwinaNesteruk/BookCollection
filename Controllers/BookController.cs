@@ -109,7 +109,7 @@ namespace BookCollection.Controllers
         [HttpPost]
         public IActionResult DeleteBook(int id)
         {
-            
+            _bookService.Delete(id);
             return View(_bookService.GetAll());
         }
     }
