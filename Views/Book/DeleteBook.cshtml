@@ -39,10 +39,6 @@
 
 <link href="~/css/table.css" type="text/css" rel="stylesheet" />
 
-@{
-    int i = 0;
-}
-
 <table>
     <tr>
         <th>Tytuł</th>
@@ -55,19 +51,19 @@
     @foreach (var book in Model)
     {
         <tr>
+            <td hidden>@book.Id</td>
             <td>@book.Title</td>
             <td>@book.NameAuthor @book.SurnameAuthor </td>
             <td>@book.Genre</td>
             <td>@book.YearOfPublication</td>
-            <td><input type="checkbox" name="checkboxInTable" id="@{i++;}" onclick="validate(this)"></td>
+            <td><input type="checkbox" name="checkboxInTable" id="@book.Id" onclick="validate(this)"></td>
         </tr>
     }
 </table>
 
 <script>
-function validate(checkboxInTable) 
-{
-   let counter = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    function validate(checkboxInTable) {
+        let counter = document.querySelectorAll('input[type="checkbox"]:checked').length;
         if (counter == 1) {
             if (checkboxInTable.checked) {
                 const button = document.getElementById("btn");
@@ -79,15 +75,19 @@ function validate(checkboxInTable)
                 const button = document.getElementById("btn");
                 button.setAttribute("disabled", true);
             }
-            
+
         }
-}
+    }
     function onConfirm() {
-        if (confirm('Czy na pewno chcesz usunąć wybrane książki?'))
-            if ;
-        else
-            alert('clicked confirmed');
 
+        let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        let ids = Array.from(checkboxes).map(checkbox => checkbox.id);
+        if (confirm('Czy na pewno chcesz usunąć wybrane książki?')) {
+            let query = ids.map(id => `ids=${id}`).join('&');
+
+            fetch(`/Book/DeleteBook?${query}`, {
+                method: 'POST'
+            })
+        }
     };
-
 </script>

@@ -1,5 +1,6 @@
 ﻿using BookCollection.Models;
 using BookCollection.Services.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BookCollection.Services
@@ -23,10 +24,10 @@ namespace BookCollection.Services
             _dbBook.SaveChanges();
         } 
         
-        public void Delete(int id)
+        public void Delete(List<int> ids)
         {
-            var dbBook = _dbBook.Find<Book>(id);
-            _dbBook.Remove(dbBook);
+            var dbBook = _dbBook.Books.Where(x => ids.Contains(x.Id)).ToList();
+            _dbBook.Books.RemoveRange(dbBook);
             _dbBook.SaveChanges();
         }
 

@@ -107,10 +107,10 @@ namespace BookCollection.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteBook(int id)
+        public IActionResult DeleteBook([FromQuery] List<int> ids)
         {
-            _bookService.Delete(id);
-            return View(_bookService.GetAll());
+            _bookService.Delete(ids);
+            return RedirectToAction("DeleteBook");
         }
     }
 }

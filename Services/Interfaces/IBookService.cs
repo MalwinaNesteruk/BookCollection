@@ -14,6 +14,6 @@ namespace BookCollection.Services.Interfaces
         IEnumerable<Book> GenreZToA();        
         IEnumerable<Book> YearAToZ();
         IEnumerable<Book> YearZToA();
-        void Delete(int id);
+        void Delete(List<int> ids);
     }
 }
