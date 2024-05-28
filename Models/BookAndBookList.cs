@@ -3,6 +3,6 @@
     public class BookAndBookList
     {
         public Book OneBook { get; set; }
-        public IEnumerable<Book> ListOfBooks {  get; set; } =new List<Book>();
+        public IEnumerable<Book> ListOfBooks { get; set; }
     }
 }

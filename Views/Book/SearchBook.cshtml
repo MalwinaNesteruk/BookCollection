@@ -78,11 +78,10 @@
     </div>
 </div>
 
+
+
 <div class="row2" id="row2" hidden>
-
-
     <button class="btn2 btn-default" id="btnSearchAgain" name="btn2" onclick="searchAgain()">Wyszukaj ponownie</button>
-
     <link href="~/css/table.css" type="text/css" rel="stylesheet" />
 
     <table>
@@ -92,18 +91,12 @@
             <th>Gatunek</th>
             <th>Data wydania</th>
         </tr>
-        @{
-            var aaaaa = Model.ListOfBooks.FirstOrDefault()?.Title;
-        }
-            <tr>
-            <td>@aaaaa</td>
-            </tr>
 
         @foreach (var book in Model.ListOfBooks)
         {
             <tr>
                 <td>@book.Title</td>
-                <td>@book.NameAuthor + @book.SurnameAuthor </td>
+                <td>@book.NameAuthor @book.SurnameAuthor </td>
                 <td>@book.Genre</td>
                 <td>@book.YearOfPublication</td>
             </tr>
@@ -146,9 +139,6 @@
         row.setAttribute("hidden", true);
         row2.removeAttribute("hidden");
         oldElement.replaceWith(newElement);
-        fetch(`/Book/SearchBook?${12}`, {
-            method: 'POST'
-        })
     }
 
 </script>

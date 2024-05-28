@@ -116,22 +116,14 @@ namespace BookCollection.Controllers
         [HttpGet]
         public IActionResult SearchBook()
         {
-            var model = new BookAndBookList();
+            var model = new BookAndBookList() { ListOfBooks = _bookService.Search() };
             return View(model);
         }
 
         [HttpPost] //tutaj powinien być zawsze jakiś parametr przyjmowany
         public IActionResult SearchBook(Book book)
         {
-
-            /*if (!ModelState.IsValid) //sprawdza, czy w formularzu wszystkie pola wypełnione 
-            {
-                return View(book); //zwraca widok z zapamiętanymi danymi wpisanymi przez użytkownika
-            }
-            _bookService.Save(book);*/
-            var model = new BookAndBookList() { ListOfBooks = _bookService.Search() };
-            return View(model);
-            //return RedirectToAction("SearchBook"); powrót do metody add, "czyszczą się" pola w formularzu
+            return View(_bookService.Search());
         }
 
     }
