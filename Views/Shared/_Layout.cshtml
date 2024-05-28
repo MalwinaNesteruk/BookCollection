@@ -25,6 +25,9 @@
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "DeleteBook" ? "nav-link active" : "nav-link")">
                         <a class="nav-link text-dark" @Html.ActionLink("Usuń książki", "DeleteBook", "Book", new { area = "" }, new { })</a>
                     </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "SearchBook" ? "nav-link active" : "nav-link")">
+                        <a class="nav-link text-dark" @Html.ActionLink("Wyszukaj książki", "SearchBook", "Book", new { area = "" }, new { })</a>
+                    </li>
                 </ul>
             </div>
         </nav>

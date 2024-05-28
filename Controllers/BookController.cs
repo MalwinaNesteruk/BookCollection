@@ -110,7 +110,26 @@ namespace BookCollection.Controllers
         public IActionResult DeleteBook([FromQuery] List<int> ids)
         {
             _bookService.Delete(ids);
-            return RedirectToAction("DeleteBook");
+            return RedirectToAction("DeleteBook", "Book");
+        }
+
+        [HttpGet]
+        public IActionResult SearchBook()
+        {
+
+            return View();
+        }
+
+        [HttpPost] //tutaj powinien być zawsze jakiś parametr przyjmowany
+        public IActionResult SearchBook(Book book)
+        {
+
+            /*if (!ModelState.IsValid) //sprawdza, czy w formularzu wszystkie pola wypełnione 
+            {
+                return View(book); //zwraca widok z zapamiętanymi danymi wpisanymi przez użytkownika
+            }
+            _bookService.Save(book);*/
+            return RedirectToAction("SearchBook"); //powrót do metody add, "czyszczą się" pola w formularzu
         }
     }
 }

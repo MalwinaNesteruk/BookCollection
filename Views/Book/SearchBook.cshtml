@@ -1,0 +1,146 @@
+﻿@model BookCollection.Models.Book
+
+<h1>Wyszukiwanie książek</h1>
+
+<hr />
+
+
+<style type="text/css">
+
+    .btn:enabled {
+        background-color: #0096FF;
+        color: #FFFFFF;
+        padding: 10px 30px;
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    .btn:disabled {
+        background-color: #696969;
+        color: #FFFFFF;
+        padding: 10px 30px;
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    .btn2 {
+        border-radius: 3px;
+        border: 1px solid #0096FF;
+        background-color: #0096FF;
+        color: #FFFFFF;
+        padding: 10px 30px;
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .form-control {
+        margin-bottom: 30px;
+    }
+
+</style>
+
+<div class="row" id="proba">
+    <div class="col-md-4">
+        <form asp-action="SearchBook" method="POST">
+        </form>
+    </div>
+</div>
+
+<div class="row" id="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title" class="control-label">Tytuł</label>
+        <input asp-for="Title" id="title" onchange="return contactFormEmpty()" class="form-control" />
+    @*                 <span asp-validation-for="Title" class="text-danger"></span>
+    *@            </div>
+    <div class="form-group">
+        <label asp-for="NameAuthor" class="control-label">Imię autora</label>
+        <input asp-for="NameAuthor" id="name" onchange="return contactFormEmpty()" class="form-control" />
+    @*                 <span asp-validation-for="NameAuthor" class="text-danger"></span>
+    *@            </div>
+    <div class="form-group">
+        <label asp-for="SurnameAuthor" class="control-label">Nazwisko autora</label>
+        <input asp-for="SurnameAuthor" id="surname" onchange="return contactFormEmpty()" class="form-control" />
+    @*                 <span asp-validation-for="SurnameAuthor" class="text-danger"></span>
+    *@            </div>
+    <div class="form-group">
+        <label asp-for="Genre" class="control-label">Gatunek literacki</label>
+        <input asp-for="Genre" id="genre" onchange="return contactFormEmpty()" class="form-control" />
+    @*                 <span asp-validation-for="Genre" class="text-danger"></span>
+    *@            </div>
+    <div class="form-group">
+        <label asp-for="YearOfPublication" class="control-label">Data wydania</label> @* tworzy labelkę *@
+        <input asp-for="YearOfPublication" id="year" onchange="return contactFormEmpty()" class="form-control" /> @* tworzy pole tekstowe typu liczbowego *@
+    @*                 <span asp-validation-for="YearOfPublication" class="text-danger"></span>
+    *@            </div>
+    <div class="form-group">
+        <button class="btn btn-default" id="btnSearch" name="btn" disabled="true" onclick="search()">Wyszukaj</button>
+    </div>
+</div>
+
+<div class="row2" id="row2" hidden>
+
+
+    <button class="btn2 btn-default" id="btnSearchAgain" name="btn2" onclick="searchAgain()">Wyszukaj ponownie</button>
+
+    <link href="~/css/table.css" type="text/css" rel="stylesheet" />
+
+    <table>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Gatunek</th>
+            <th>Data wydania</th>
+        </tr>
+
+        @*     @foreach (var book in Model)
+        {
+        <tr>
+        <td>@book.Title</td>
+        <td>@book.NameAuthor @book.SurnameAuthor </td>
+        <td>@book.Genre</td>
+        <td>@book.YearOfPublication</td>
+        </tr>
+        } *@
+    </table>
+</div>
+
+
+<script>
+    function contactFormEmpty() {
+        let title = document.getElementById("title").value;
+        title.trim();
+        let name = document.getElementById("name").value;
+        name.trim();
+        let surname = document.getElementById("surname").value;
+        surname.trim();
+        let genre = document.getElementById("genre").value;
+        genre.trim();
+        let year = document.getElementById("year").value;
+        year.trim();
+        if ((title == "") && (name == "") && (surname == "") && (genre == "") && (year == "")) {
+            btnSearch.setAttribute("disabled", true);
+        }
+        else {
+            btnSearch.removeAttribute("disabled");
+        }
+    }
+    var oldElement = document.getElementById('proba');
+
+    function searchAgain() {
+        var newElement = document.getElementById('row');
+        row2.setAttribute("hidden", true);
+        row.removeAttribute("hidden");
+        oldElement.replaceWith(newElement);
+    }
+
+    function search() {
+        var newElement = document.getElementById('row2');
+        row.setAttribute("hidden", true);
+        row2.removeAttribute("hidden");
+        oldElement.replaceWith(newElement);
+    }
+
+</script>
+
+
