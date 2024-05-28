@@ -18,6 +18,11 @@ namespace BookCollection.Services
             return _dbBook.Books.ToList();
         }
 
+        public IEnumerable<Book> Search()
+        {
+            return _dbBook.Books.ToList();
+        }
+
         public void Save(Book book)
         {
             _dbBook.Add(book);

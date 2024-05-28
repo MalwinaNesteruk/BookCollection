@@ -6,6 +6,7 @@ namespace BookCollection.Services.Interfaces
     {
         void Save(Book book); //Zapis do bazy danych
         IEnumerable<Book> GetAll();
+        IEnumerable<Book> Search();
         IEnumerable<Book> TitleAToZ();
         IEnumerable<Book> TitleZToA();        
         IEnumerable<Book> AuthorAToZ();

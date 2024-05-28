@@ -116,8 +116,8 @@ namespace BookCollection.Controllers
         [HttpGet]
         public IActionResult SearchBook()
         {
-
-            return View();
+            var model = new BookAndBookList();
+            return View(model);
         }
 
         [HttpPost] //tutaj powinien być zawsze jakiś parametr przyjmowany
@@ -129,7 +129,10 @@ namespace BookCollection.Controllers
                 return View(book); //zwraca widok z zapamiętanymi danymi wpisanymi przez użytkownika
             }
             _bookService.Save(book);*/
-            return RedirectToAction("SearchBook"); //powrót do metody add, "czyszczą się" pola w formularzu
+            var model = new BookAndBookList() { ListOfBooks = _bookService.Search() };
+            return View(model);
+            //return RedirectToAction("SearchBook"); powrót do metody add, "czyszczą się" pola w formularzu
         }
+
     }
 }

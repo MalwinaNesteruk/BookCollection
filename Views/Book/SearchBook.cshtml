@@ -1,4 +1,4 @@
-﻿@model BookCollection.Models.Book
+﻿@model BookCollection.Models.BookAndBookList
 
 <h1>Wyszukiwanie książek</h1>
 
@@ -49,28 +49,28 @@
 <div class="row" id="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="Title" class="control-label">Tytuł</label>
-        <input asp-for="Title" id="title" onchange="return contactFormEmpty()" class="form-control" />
+        <label asp-for="@Model.OneBook.Title" class="control-label">Tytuł</label>
+        <input asp-for="@Model.OneBook.Title" id="title" onchange="return contactFormEmpty()" class="form-control" />
     @*                 <span asp-validation-for="Title" class="text-danger"></span>
     *@            </div>
     <div class="form-group">
-        <label asp-for="NameAuthor" class="control-label">Imię autora</label>
-        <input asp-for="NameAuthor" id="name" onchange="return contactFormEmpty()" class="form-control" />
+        <label asp-for="@Model.OneBook.NameAuthor" class="control-label">Imię autora</label>
+        <input asp-for="@Model.OneBook.NameAuthor" id="name" onchange="return contactFormEmpty()" class="form-control" />
     @*                 <span asp-validation-for="NameAuthor" class="text-danger"></span>
     *@            </div>
     <div class="form-group">
-        <label asp-for="SurnameAuthor" class="control-label">Nazwisko autora</label>
-        <input asp-for="SurnameAuthor" id="surname" onchange="return contactFormEmpty()" class="form-control" />
+        <label asp-for="@Model.OneBook.SurnameAuthor" class="control-label">Nazwisko autora</label>
+        <input asp-for="@Model.OneBook.SurnameAuthor" id="surname" onchange="return contactFormEmpty()" class="form-control" />
     @*                 <span asp-validation-for="SurnameAuthor" class="text-danger"></span>
     *@            </div>
     <div class="form-group">
-        <label asp-for="Genre" class="control-label">Gatunek literacki</label>
-        <input asp-for="Genre" id="genre" onchange="return contactFormEmpty()" class="form-control" />
+        <label asp-for="@Model.OneBook.Genre" class="control-label">Gatunek literacki</label>
+        <input asp-for="@Model.OneBook.Genre" id="genre" onchange="return contactFormEmpty()" class="form-control" />
     @*                 <span asp-validation-for="Genre" class="text-danger"></span>
     *@            </div>
     <div class="form-group">
-        <label asp-for="YearOfPublication" class="control-label">Data wydania</label> @* tworzy labelkę *@
-        <input asp-for="YearOfPublication" id="year" onchange="return contactFormEmpty()" class="form-control" /> @* tworzy pole tekstowe typu liczbowego *@
+        <label asp-for="@Model.OneBook.YearOfPublication" class="control-label">Data wydania</label> @* tworzy labelkę *@
+        <input asp-for="@Model.OneBook.YearOfPublication" id="year" onchange="return contactFormEmpty()" class="form-control" /> @* tworzy pole tekstowe typu liczbowego *@
     @*                 <span asp-validation-for="YearOfPublication" class="text-danger"></span>
     *@            </div>
     <div class="form-group">
@@ -92,16 +92,22 @@
             <th>Gatunek</th>
             <th>Data wydania</th>
         </tr>
+        @{
+            var aaaaa = Model.ListOfBooks.FirstOrDefault()?.Title;
+        }
+            <tr>
+            <td>@aaaaa</td>
+            </tr>
 
-        @*     @foreach (var book in Model)
+        @foreach (var book in Model.ListOfBooks)
         {
-        <tr>
-        <td>@book.Title</td>
-        <td>@book.NameAuthor @book.SurnameAuthor </td>
-        <td>@book.Genre</td>
-        <td>@book.YearOfPublication</td>
-        </tr>
-        } *@
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.NameAuthor + @book.SurnameAuthor </td>
+                <td>@book.Genre</td>
+                <td>@book.YearOfPublication</td>
+            </tr>
+        }
     </table>
 </div>
 
@@ -125,6 +131,7 @@
             btnSearch.removeAttribute("disabled");
         }
     }
+
     var oldElement = document.getElementById('proba');
 
     function searchAgain() {
@@ -139,6 +146,9 @@
         row.setAttribute("hidden", true);
         row2.removeAttribute("hidden");
         oldElement.replaceWith(newElement);
+        fetch(`/Book/SearchBook?${12}`, {
+            method: 'POST'
+        })
     }
 
 </script>
