@@ -114,16 +114,22 @@ namespace BookCollection.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchBook()
+        public IActionResult SearchBook(string title = null, string name = null, string surname = null, string genre = null, int? year = null)
         {
-            var model = new BookAndBookList() { ListOfBooks = _bookService.Search() };
+            //_bookService.Search(title, name, surname, genre, year);
+            var result = _bookService.Search(title);
+            var model = new BookAndBookList() { ListOfBooks = _bookService.Search(title) };
             return View(model);
         }
 
         [HttpPost] //tutaj powinien być zawsze jakiś parametr przyjmowany
-        public IActionResult SearchBook(Book book)
+        public IActionResult SearchBook(string title = null) //[FromQuery] string title = null, string name = null, string surname = null, string genre = null, int? year = null)
         {
-            return View(_bookService.Search());
+            //string titleDownload = Convert.ToString(title);
+
+            var result = _bookService.Search(title); //, name, surname, genre, year);
+            //return RedirectToAction("SearchBook", "Book");
+            return View(result);
         }
 
     }

@@ -106,22 +106,25 @@
 
 
 <script>
+
     function contactFormEmpty() {
-        let title = document.getElementById("title").value;
-        title.trim();
-        let name = document.getElementById("name").value;
+        var title = document.getElementById("title").value;
+        title = title.trim();
+        var name = document.getElementById("name").value;
         name.trim();
-        let surname = document.getElementById("surname").value;
+        var surname = document.getElementById("surname").value;
         surname.trim();
-        let genre = document.getElementById("genre").value;
+        var genre = document.getElementById("genre").value;
         genre.trim();
-        let year = document.getElementById("year").value;
+        var year = document.getElementById("year").value;
         year.trim();
-        if ((title == "") && (name == "") && (surname == "") && (genre == "") && (year == "")) {
+        if ((title === "") && (name === "") && (surname === "") && (genre === "") && (year === "")) {
             btnSearch.setAttribute("disabled", true);
+            console.log("aaa");
         }
         else {
             btnSearch.removeAttribute("disabled");
+            console.log("abbbaa");
         }
     }
 
@@ -135,12 +138,53 @@
     }
 
     function search() {
+        var title = document.getElementById("title").value;
+        title = title.trim();
+        var name = document.getElementById("name").value;
+        name.trim();
+        var surname = document.getElementById("surname").value;
+        surname.trim();
+        var genre = document.getElementById("genre").value;
+        genre.trim();
+        var year = document.getElementById("year").value;
+        year.trim();
+
+        fetch(`/Book/SearchBook?` + new URLSearchParams({
+            title: 'Pokuta'
+        }))
+
         var newElement = document.getElementById('row2');
         row.setAttribute("hidden", true);
         row2.removeAttribute("hidden");
+        var oldElement = document.getElementById('proba');
         oldElement.replaceWith(newElement);
+
+            
     }
 
 </script>
 
+@* $.ajax({
+            url: '@Url.Action("SearchBook", "Book")',
+            type: 'GET',
+            data: {
+                Title: title,
+                NameAuthor: name,
+                SurnameAuthor: surname,
+                Genre: genre,
+                YearOfPublication: year
+            },
+            success: function (response) {
+                console.log("Login successful!");
+            },
+            error: function (xhr, status, error) {
+                console.log("Login failed");
+            }
+        }) *@
 
+     @* $.ajax({
+            type: "POST",
+            url: "/Book/SearchBook",
+            data: { Title: title, NameAuthor: name, SurnameAuthor: surname, Genre: genre, YearOfPublication: year }
+        })
+ *@

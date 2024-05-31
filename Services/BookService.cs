@@ -2,6 +2,7 @@
 using BookCollection.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 
 namespace BookCollection.Services
 {
@@ -18,9 +19,13 @@ namespace BookCollection.Services
             return _dbBook.Books.ToList();
         }
 
-        public IEnumerable<Book> Search()
+        public IEnumerable<Book> Search(string title = null, string name = null, string surname = null, string genre = null, int? year = null)
         {
-            return _dbBook.Books.ToList();
+            return _dbBook.Books.Where(x => (x.Title == title || title == null)
+                                            && (x.NameAuthor == name || name == null)
+                                            && (x.SurnameAuthor == surname || surname == null)
+                                            && (x.Genre == genre || genre == null)
+                                            && (x.YearOfPublication == year || year == null)).ToList();
         }
 
         public void Save(Book book)
