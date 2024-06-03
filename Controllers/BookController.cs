@@ -9,7 +9,7 @@ namespace BookCollection.Controllers
     {
         public readonly IBookService _bookService;
         List<string> option = new List<string>()
-        { 
+        {
               "tytuł A-Z",
               "tytuł Z-A",
               "autor A-Z",
@@ -32,7 +32,7 @@ namespace BookCollection.Controllers
         }
 
         [HttpPost] //tutaj powinien być zawsze jakiś parametr przyjmowany
-        public IActionResult AddBook(Book book) 
+        public IActionResult AddBook(Book book)
         {
 
             if (!ModelState.IsValid) //sprawdza, czy w formularzu wszystkie pola wypełnione 
@@ -44,7 +44,7 @@ namespace BookCollection.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllBook() 
+        public IActionResult GetAllBook()
         {
             SelectList selectOption = new SelectList(option);
             ViewBag.Book = selectOption;
@@ -56,7 +56,7 @@ namespace BookCollection.Controllers
         {
             SelectList selectOption = new SelectList(option);
             ViewBag.Book = selectOption;
-            if (sorting=="tytuł A-Z")
+            if (sorting == "tytuł A-Z")
             {
                 return View(_bookService.TitleAToZ());
             }
@@ -102,7 +102,7 @@ namespace BookCollection.Controllers
         [HttpGet]
         public IActionResult DeleteBook()
         {
-            
+
             return View(_bookService.GetAll());
         }
 
@@ -114,23 +114,16 @@ namespace BookCollection.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchBook(string title = null, string name = null, string surname = null, string genre = null, int? year = null)
+        public IActionResult SearchBookForm()
         {
-            //_bookService.Search(title, name, surname, genre, year);
-            var result = _bookService.Search(title);
-            var model = new BookAndBookList() { ListOfBooks = _bookService.Search(title) };
-            return View(model);
+            return View();
         }
 
-        [HttpPost] //tutaj powinien być zawsze jakiś parametr przyjmowany
-        public IActionResult SearchBook(string title = null) //[FromQuery] string title = null, string name = null, string surname = null, string genre = null, int? year = null)
+        [HttpGet]
+        public IActionResult SearchBookTable(string title = null, string name = null, string surname = null, string genre = null, int? year = null)
         {
-            //string titleDownload = Convert.ToString(title);
-
-            var result = _bookService.Search(title); //, name, surname, genre, year);
-            //return RedirectToAction("SearchBook", "Book");
+            var result = _bookService.Search(title, name, surname, genre, year);
             return View(result);
         }
-
     }
 }

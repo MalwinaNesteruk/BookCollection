@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BookCollection.Models.Book>
+
+<h1>Wyszukiwanie książek</h1>
+
+<hr />
+
+<style type="text/css">
+
+    .btn2 {
+        border-radius: 3px;
+        border: 1px solid #0096FF;
+        background-color: #0096FF;
+        color: #FFFFFF;
+        padding: 10px 30px;
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .form-control {
+        margin-bottom: 30px;
+    }
+
+</style>
+
+<div class="row2" id="row2">
+    <button class="btn2 btn-default" id="btnSearchAgain" name="btn2" onclick="searchAgain()">Wyszukaj ponownie</button>
+    <link href="~/css/table.css" type="text/css" rel="stylesheet" />
+
+    <table>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Gatunek</th>
+            <th>Data wydania</th>
+        </tr>
+
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.NameAuthor @book.SurnameAuthor </td>
+                <td>@book.Genre</td>
+                <td>@book.YearOfPublication</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script>
+    function searchAgain() {
+        location.href = "/Book/SearchBookForm";
+    }
+        </script>
