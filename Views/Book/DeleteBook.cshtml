@@ -2,6 +2,8 @@
 @model IEnumerable<BookCollection.Models.Book>
 @inject IJSRuntime JsRuntime
 
+<link href="~/css/formatting.css" type="text/css" rel="stylesheet" />
+
 <h1>Usuwanie książek</h1>
 
 <hr />
@@ -33,9 +35,6 @@
         <button class="btn btn-default" id="btn" name="btn" disabled="true" onclick="onConfirm();">Usuń</button>
     </form>
 </div>
-
-@* @Html.ActionLink("Delete", "Delete", new { id = item.BookId }) *@
-
 
 <link href="~/css/table.css" type="text/css" rel="stylesheet" />
 

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<BookCollection.Models.Book>
 
+<link href="~/css/formatting.css" type="text/css" rel="stylesheet" />
+
 <h1>Wyszukiwanie książek</h1>
 
 <hr />
@@ -25,26 +27,26 @@
 <div class="row2" id="row2">
     <button class="btn2 btn-default" id="btnSearchAgain" name="btn2" onclick="searchAgain()">Wyszukaj ponownie</button>
     <link href="~/css/table.css" type="text/css" rel="stylesheet" />
-
-    <table>
-        <tr>
-            <th>Tytuł</th>
-            <th>Autor</th>
-            <th>Gatunek</th>
-            <th>Data wydania</th>
-        </tr>
-
-        @foreach (var book in Model)
-        {
-            <tr>
-                <td>@book.Title</td>
-                <td>@book.NameAuthor @book.SurnameAuthor </td>
-                <td>@book.Genre</td>
-                <td>@book.YearOfPublication</td>
-            </tr>
-        }
-    </table>
 </div>
+
+<table>
+    <tr>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>Gatunek</th>
+        <th>Data wydania</th>
+    </tr>
+
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Title</td>
+            <td>@book.NameAuthor @book.SurnameAuthor </td>
+            <td>@book.Genre</td>
+            <td>@book.YearOfPublication</td>
+        </tr>
+    }
+</table>
 
 <script>
     function searchAgain() {
